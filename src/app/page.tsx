@@ -1,23 +1,57 @@
 "use client";
 import Image from "next/image";
-import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useTypewriter } from "react-simple-typewriter";
+import Writer from "./typeWriter";
+import { SketchPicker } from "react-color";
+import { reset, setOptions } from "@/redux/options-slice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { Button } from "@nextui-org/react";
+import OptionsSelector from "./optionsSelector";
 
 export default function Home() {
+  const [string, setString] = useState("");
+  const [bgColor, setBgColor] = useState("");
+  const [arr, setArr] = useState<string[]>([]);
   const [title, count] = useTypewriter({
     words: ["<Typewriter Generator />"],
     delaySpeed: 2000,
   });
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    setArr([string]);
+    Process(string);
+  }, [string]);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const result = (
+      e.currentTarget.elements.namedItem("input") as HTMLInputElement
+    ).value;
+    setString(result);
+  }
+
+  function Process(text: string) {
+    console.log(text);
+  }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center  bg-white w-full">
+    <main className=" flex min-h-screen flex-col items-center justify-center  bg-white w-full">
       <p className="text-5xl mb-10 h-12 font-extrabold text-black font-mono whitespace-nowrap">
         {title}
       </p>
-      <form className="flex w-full justify-center">
+      <form
+        className="flex w-full justify-center"
+        method="POST"
+        onSubmit={handleSubmit}
+      >
         <div className="relative w-1/2">
           <input
+            name="input"
             className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Enter your text"
+            placeholder="Words go here..."
             required
           />
           <button
@@ -28,6 +62,13 @@ export default function Home() {
           </button>
         </div>
       </form>
+      <details className="mt-4 w-1/2 h-[200px]">
+        <summary>Options</summary>
+        <OptionsSelector />
+      </details>
+      <div className="absolute bottom-0 text-xl">
+        <Writer words={arr} delaySpeed={2000} loop={false} />
+      </div>
     </main>
   );
 }
