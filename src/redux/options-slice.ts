@@ -19,16 +19,16 @@ type Options = {
 
 const initialState = {
   value: {
-    bgColor: "",
-    fontColor: "",
-    fontSize: "",
+    bgColor: "#ffffff",
+    fontColor: "#000000",
+    fontSize: "text-xl",
     words: [],
     typeSpeed: 80,
     deleteSpeed: 50,
     delaySpeed: 1500,
-    loop: 1, //number|boolean (Control how many times to run. 0 | false to run infinitely)
+    loop: 0, //number|boolean (Control how many times to run. 0 | false to run infinitely)
     cursor: false,
-    cursorStyle: "",
+    cursorStyle: "|",
     cursorBlinking: false,
   } as Options,
 } as InitialState;
@@ -64,8 +64,11 @@ export const options = createSlice({
     setDelaySpeed: (state, action: PayloadAction<number>) => {
       state.value.delaySpeed = action.payload;
     },
-    toggleCursor: (state) => {
-      state.value.cursor = !state.value.cursor;
+    setLoop: (state, action: PayloadAction<number | boolean>) => {
+      state.value.loop = action.payload;
+    },
+    setCursor: (state, action: PayloadAction<boolean>) => {
+      state.value.cursor = action.payload;
     },
     setCursorStyle: (state, action: PayloadAction<string>) => {
       state.value.cursorStyle = action.payload;
@@ -86,7 +89,8 @@ export const {
   setTypeSpeed,
   setDeleteSpeed,
   setDelaySpeed,
-  toggleCursor,
+  setLoop,
+  setCursor,
   setCursorStyle,
   setCursorBlinking,
 } = options.actions;
