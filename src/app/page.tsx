@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import { WithContext as ReactTags } from 'react-tag-input';
 import toast, { Toaster } from 'react-hot-toast';
+import Header from "./header";
 import Footer from "./footer";
 import OptionsSelector from "./optionsSelector";
 import "./styles/reactTag.css";
@@ -51,18 +52,21 @@ export default function Home() {
 
   return (
     <div className="">
-      <div className="flex flex-col min-h-screen items-center justify-center bg-white w-full">
+      <Header />
+      <div className="flex flex-col h-screen items-center justify-center bg-white dark:bg-darkBlue w-full">
         <p className="text-5xl mb-10 h-12 font-extrabold text-black font-mono whitespace-nowrap">
           {title}
         </p>
         <div className="relative flex justify-center w-1/2">
+          <div className="w-full dark:text-darkBlue">
           <ReactTags tags={wordsArr} handleAddition={handleAddition} handleDelete={handleDelete} handleDrag={handleDrag} suggestions={[]} inputFieldPosition="bottom" placeholder="Words go here..." />
+          </div>
           <button
             type="button"
-            className="text-white absolute right-5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white absolute right-5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-darkBlue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={handleSubmit}
           >
-            Create
+            <p className="text-white">Create</p>
           </button>
           <Toaster />
         </div>
