@@ -4,7 +4,7 @@ import { useTypewriter } from "react-simple-typewriter";
 import { useDispatch } from "react-redux";
 import { setWords } from "@/redux/options-slice";
 import { useRouter } from 'next/navigation';
-import { Accordion, AccordionItem } from "@nextui-org/react";
+import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 import { WithContext as ReactTags } from 'react-tag-input';
 import toast, { Toaster } from 'react-hot-toast';
 import Header from "./header";
@@ -54,20 +54,14 @@ export default function Home() {
     <div className="">
       <Header />
       <div className="flex flex-col h-screen items-center justify-center bg-white dark:bg-darkBlue w-full">
-        <p className="text-5xl mb-10 h-12 font-extrabold text-black font-mono whitespace-nowrap">
+        <p className="text-5xl mb-10 h-12 font-extrabold text-black dark:text-gray-100 font-mono whitespace-nowrap">
           {title}
         </p>
         <div className="relative flex justify-center w-1/2">
           <div className="w-full dark:text-darkBlue">
           <ReactTags tags={wordsArr} handleAddition={handleAddition} handleDelete={handleDelete} handleDrag={handleDrag} suggestions={[]} inputFieldPosition="bottom" placeholder="Words go here..." />
           </div>
-          <button
-            type="button"
-            className="text-white absolute right-5 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-darkBlue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={handleSubmit}
-          >
-            <p className="text-white">Create</p>
-          </button>
+          <Button className="text-white absolute right-5 bottom-1.5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 bg-blue-700 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleSubmit}>Create</Button>
           <Toaster />
         </div>
         <div className="w-1/2">

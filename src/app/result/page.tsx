@@ -21,7 +21,7 @@ export default function Page() {
             ⬅ Back
           </Button>
         </div>
-        <p className="text-5xl mb-2 h-12 font-extrabold text-black font-mono whitespace-nowrap">
+        <p className="text-5xl mb-2 h-12 font-extrabold text-black dark:text-gray-100 font-mono whitespace-nowrap">
           Result
         </p>
         <p className="">Use any screen capture app to recording the animation</p>
@@ -36,7 +36,7 @@ export default function Page() {
           <Writer />
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
 
   );

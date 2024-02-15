@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+
+const colors = require("tailwindcss/colors");
 const { nextui } = require("@nextui-org/theme");
 
 const config: Config = {
@@ -10,6 +12,16 @@ const config: Config = {
   ],
   theme: {
     colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+      emerald: colors.emerald,
+      indigo: colors.indigo,
+      yellow: colors.yellow,
+      blue: colors.blue,
+      red: colors.red,
       darkBlue: "#121212",
     },
     extend: {
